@@ -1,0 +1,4 @@
+logs/*
+images/*
+legacy-ssl/openssl-*.tar.gz
+__pycache__/

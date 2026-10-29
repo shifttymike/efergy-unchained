@@ -16,12 +16,8 @@
 *.cof
 *.elf
 *.hex
-!/recovery/*.hex
 !/binaries/**/*.hex
-/recovery/*.bin
-# Local OEM copies and readbacks are recovery evidence, not release artifacts.
-/recovery/oem-*.hex
-/recovery/post-oem-*.hex
+/recovery/
 *.log
 **/.DS_Store
 

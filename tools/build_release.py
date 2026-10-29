@@ -11,7 +11,7 @@ def sha(path):return hashlib.sha256(Path(path).read_bytes()).hexdigest()
 def copy(source,target):target=Path(target);target.parent.mkdir(parents=True,exist_ok=True);shutil.copy2(source,target)
 def main():
  p=argparse.ArgumentParser();p.add_argument('--oem',required=True);p.add_argument('--server');p.add_argument('--validation',help='public validation JSON');p.add_argument('--replace',action='store_true');a=p.parse_args()
- server=Path(a.server) if a.server else next(x for x in [ROOT.parent/'oem-installer',ROOT.parent/'oem-server'] if x.is_dir())
+ server=Path(a.server) if a.server else ROOT/'oem-server'
  out=ROOT/'dist'/('efergy-'+VERSION);out.parent.mkdir(exist_ok=True)
  if out.exists() and (not a.replace or not (out/'release.json').is_file()):raise SystemExit('release exists; use --replace for an existing generated release')
  with tempfile.TemporaryDirectory(prefix='release-',dir=out.parent) as temporary:

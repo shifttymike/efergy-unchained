@@ -1,0 +1,23 @@
+services:
+  backend:
+    build: .
+    ports:
+      - "80:8080"
+    environment:
+      OEM_COMMAND: "${OEM_COMMAND:-}"
+      IMAGE_PATH: /images/firmware.hex
+    volumes:
+      - ./images:/images:ro
+      - ./logs:/logs
+    restart: "no"
+  legacy:
+    build: ./legacy-ssl
+    ports:
+      - "443:443"
+    depends_on:
+      - backend
+    volumes:
+      - legacy-cert:/cert
+    restart: "no"
+volumes:
+  legacy-cert:
