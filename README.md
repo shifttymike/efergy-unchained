@@ -13,18 +13,27 @@ parsers.
 
 This is not that.
 
-This project is a complete rewrite of the firmware. It provides
+This project is a complete rewrite of the firmware. It provides:
 - MQTT support with automatic Home Assistant registration
 - A built-in HTTP server for monitoring and configuration
 - OTA updates
 
-If you're not ready to jump to custom firmware, there's also a patched version
-of the OEM firmware which removes the SSLv3 requirement and communicates over
-plain HTTP.
+![Home Assistant](docs/public/images/homeassistant.png)
 
-I've included a small Docker update server for loading firmware images from OEM
-and the OTA functionality of the new firmware means you can go back at any time.
-No programmer required. Not even a screwdriver.
+![Web UI 1](docs/public/images/web1.png)
+
+![Web UI 2](docs/public/images/web2.png)
+
+If you're not ready to jump to custom firmware, there's also a patched version
+of the OEM firmware which removes the SSLv3 layer and communicates over
+plain HTTP on port 80.
+
+No programmer? I've included a small Docker update server for loading firmware
+images from OEM and the OTA functionality of the new firmware means you can
+go back at any time.
+Don't even need a screwdriver.
+
+If you have a programmer, there are images for that too.
 
 ## Flashing paths
 
@@ -36,7 +45,6 @@ the server:
 
 ```sh
 cd oem-server
-mkdir -p images logs
 cp ../firmware/custom/custom-0.6.3-from-oem.hex images/firmware.hex
 docker compose up --build -d
 ```
