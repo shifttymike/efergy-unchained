@@ -45,8 +45,10 @@ the server:
 
 ```sh
 cd oem-server
+mkdir images logs
 cp ../firmware/custom/custom-0.6.3-from-oem.hex images/firmware.hex
 docker compose up --build -d
+
 ```
 
 Allow several minutes with stable external power. See [full instructions](docs/public/switching.md#oem-371-to-custom).

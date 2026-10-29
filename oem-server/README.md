@@ -10,7 +10,7 @@ From the repository root, stage the image you want to offer:
 mkdir -p oem-server/images oem-server/logs
 cp binaries/custom/custom-0.6.3-from-oem.hex oem-server/images/firmware.hex
 cd oem-server
-docker compose up --build -d
+docker compose up --build
 ```
 
 For the HTTP-only OEM patch, copy
