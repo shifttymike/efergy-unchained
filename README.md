@@ -47,7 +47,7 @@ the server:
 cd oem-server
 mkdir images logs
 cp ../firmware/custom/custom-0.6.3-from-oem.hex images/firmware.hex
-docker compose up --build -d
+docker compose up --build
 
 ```
 
@@ -91,8 +91,8 @@ follow the [hardware instructions](docs/public/hardware.md).
 ## Supported hardware
 
 Tested with one Efergy Engage Hub, one transmitter and OEM firmware 3.7.1. Other
-board revisions, transmitters and OEM versions are unverified. Keep external
-power connected during conversions; do not use PICkit target power.
+board revisions, transmitters and OEM versions are unverified. Multiple transmitters
+should work but are untested. Keep external power connected during conversions.
 
 ![PCB](docs/public/images/pcb.jpeg)
 
