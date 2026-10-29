@@ -1,0 +1,12 @@
+[
+  {
+    "topic": "efergy/5410eca5a92a/827781/state",
+    "payload": "{\"transmitter_id\":827781,\"current_a\":5.650,\"battery_ok\":true,\"interval\":6,\"learn\":false,\"power_w\":1299.5,\"voltage_v\":230,\"rssi_dbm\":-92.0}",
+    "retained": true
+  },
+  {
+    "topic": "efergy/5410eca5a92a/availability",
+    "payload": "online",
+    "retained": true
+  }
+]

@@ -1,0 +1,31 @@
+{
+  "../PIC18F67J60.hex": {
+    "bytes": 360500,
+    "sha256": "613143553c43947337ac3a9ae3f9ebd40b1abccb53741bf73793646a9d55f6a0"
+  },
+  "../efergyhub_dumps/dumps/PIC18F67J60-after-restore.hex": {
+    "bytes": 360500,
+    "sha256": "613143553c43947337ac3a9ae3f9ebd40b1abccb53741bf73793646a9d55f6a0"
+  },
+  "../efergyhub_dumps/dumps/24AA02E48.bin": {
+    "bytes": 256,
+    "sha256": "d17b0d33d60bb85eba5b223a5a258a78d9df2b66c8d38947d266c9d7ce73eb27"
+  },
+  "../efergyhub_dumps/dumps/SST25VF040B.bin": {
+    "bytes": 524288,
+    "sha256": "8e2635fb643c9a3411ca62f239b220aad53c99881ea60ad10cc5af609dda0fa9"
+  },
+  "recovery/pre-bringup-readback.hex": {
+    "bytes": 360500,
+    "sha256": "f72afaefd773ef49d7d1d3068075e4897bacd825ae8800c24f56c0668bb312e8"
+  },
+  "recovery/SST25VF040B-live-before-config.bin": {
+    "bytes": 524288,
+    "sha256": "2922e51950a7fe2ba355939e6ae4d5ccccccce5d7642b65cfdb02c462953c6d7",
+    "verified_twice": true,
+    "config_sectors_erased": [
+      "0x4f000",
+      "0x50000"
+    ]
+  }
+}

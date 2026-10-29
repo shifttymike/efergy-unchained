@@ -1,0 +1,103 @@
+{
+  "stage": "0.4-web-ui-name-interval",
+  "created_at": "2026-10-28T13:41:52.848351+00:00",
+  "compiler": "XC8 4.00",
+  "device_pack": "PIC18F-J_DFP 1.7.159",
+  "program_bytes": 61230,
+  "data_bytes": 3310,
+  "image_sha256": "6f152ab792da3cab4994163c87198497dde5058aed85c818c7231e3c134ea91d",
+  "program_and_verify": "successful",
+  "target_power": "external; PICkit power disabled",
+  "config_format": {
+    "read_versions": [
+      1,
+      2,
+      3
+    ],
+    "write_version": 3,
+    "record_bytes": 231,
+    "new_field": "device_name, 31 printable ASCII characters"
+  },
+  "web_assets": {
+    "format": "WEB2",
+    "version": 1,
+    "encoding": "gzip",
+    "address": "0x51000",
+    "bytes": 4244,
+    "gzip_bytes": 4228,
+    "html_bytes": 11163,
+    "sha256": "41c73b886bd8e43fe3e81b3dcf772c539d9e581b43f33953810bdae41d80e375",
+    "gzip_crc32": "ef3974e4"
+  },
+  "http_headers": {
+    "line_limit": 511,
+    "total_limit": 2048,
+    "request_body_limit": 767
+  },
+  "host_tests": "make check passed: parser, migration, 650 storage reset boundaries, MQTT discovery/name escaping, partial gzip streaming, interrupted asset install/repair/reuse, bounds/lock/timeout",
+  "hardware_checks": [
+    "gzip response matches generated image and decompresses to exact HTML source",
+    "IAB browser renders live values and configuration form",
+    "Device name changed and restored via UI; saved credentials preserved",
+    "Retained MQTT discovery confirms changed device name and six sensors, including interval",
+    "Existing interval and RSSI values verified in real broker payload",
+    "20 valid radio readings from 20 captures observed while UI polling ran; short observation only",
+    "Reboot preserved browser-saved configuration; page bytes remain correct; MQTT/radio resumed"
+  ],
+  "hardware_final_config": {
+    "host": "10.40.0.9",
+    "port": 1883,
+    "username_set": true,
+    "password_set": true,
+    "dhcp": 1,
+    "ip": "192.168.23.6",
+    "mask": "255.255.255.0",
+    "gateway": "192.168.23.254",
+    "dns": "192.168.23.254",
+    "sequence": 18,
+    "save_state": 0,
+    "save_error": 0,
+    "writes_enabled": 1,
+    "voltage_v": 230,
+    "device_name": "Efergy gateway"
+  },
+  "hardware_final_status": {
+    "firmware": "0.4",
+    "ip": "192.168.23.13",
+    "fallback": 0,
+    "mac_fallback": 0,
+    "network_state": 1,
+    "network_pending": 0,
+    "flash_id": "bf258d",
+    "radio_captures": 3,
+    "valid_readings": 2,
+    "legacy_id": 827781,
+    "current_mantissa": 29257,
+    "current_shift": 13,
+    "interval": 6,
+    "battery_ok": 1,
+    "mqtt_state": 4,
+    "mqtt_error": 0,
+    "mqtt_tcp_phase": 7,
+    "broker_ip": "10.40.0.9",
+    "mqtt_reconnects": 1,
+    "mqtt_publications": 9,
+    "config_state": 0,
+    "config_error": 0,
+    "config_sequence": 18,
+    "radio_version": 36,
+    "capture_profile": 1,
+    "capture_bits": 68,
+    "capture_raw": "f35e7abf8db6fdd0",
+    "rssi_raw": 186,
+    "voltage_v": 230,
+    "web_state": 0
+  },
+  "ui_screenshot": "firmware-0.4-ui.png",
+  "limits": [
+    "Existing RF reliability, long-soak and physical power-cut validation remain",
+    "Single HTTP connection alongside MQTT; browser serializes polling and saves",
+    "No NTP, persistent telemetry backlog or accumulated energy",
+    "Power assumes configured voltage and PF=1; RSSI is receiver indication"
+  ]
+}

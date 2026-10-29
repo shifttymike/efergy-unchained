@@ -1,0 +1,107 @@
+{
+  "efergy/5410eca5a92a/availability": "online",
+  "efergy/5410eca5a92a/827781/state": {
+    "transmitter_id": 827781,
+    "current_a": 20.125,
+    "battery_ok": true,
+    "interval": 6,
+    "learn": false,
+    "power_w": 4628.8,
+    "voltage_v": 230,
+    "rssi_dbm": -90.5
+  },
+  "homeassistant/sensor/efergy_5410eca5a92a_827781_current/config": {
+    "name": "Current",
+    "unique_id": "efergy_5410eca5a92a_827781_current",
+    "state_topic": "efergy/5410eca5a92a/827781/state",
+    "availability_topic": "efergy/5410eca5a92a/availability",
+    "expire_after": 30,
+    "device_class": "current",
+    "unit_of_measurement": "A",
+    "state_class": "measurement",
+    "value_template": "{{ value_json.current_a }}",
+    "device": {
+      "identifiers": [
+        "efergy_5410eca5a92a_827781"
+      ],
+      "name": "Efergy 827781",
+      "manufacturer": "Efergy",
+      "model": "e2 classic"
+    }
+  },
+  "homeassistant/binary_sensor/efergy_5410eca5a92a_827781_battery/config": {
+    "name": "Battery",
+    "unique_id": "efergy_5410eca5a92a_827781_battery",
+    "state_topic": "efergy/5410eca5a92a/827781/state",
+    "availability_topic": "efergy/5410eca5a92a/availability",
+    "expire_after": 30,
+    "device_class": "battery",
+    "value_template": "{{ 'OFF' if value_json.battery_ok else 'ON' }}",
+    "device": {
+      "identifiers": [
+        "efergy_5410eca5a92a_827781"
+      ],
+      "name": "Efergy 827781",
+      "manufacturer": "Efergy",
+      "model": "e2 classic"
+    }
+  },
+  "homeassistant/sensor/efergy_5410eca5a92a_827781_rssi/config": {
+    "name": "Signal strength",
+    "unique_id": "efergy_5410eca5a92a_827781_rssi",
+    "state_topic": "efergy/5410eca5a92a/827781/state",
+    "availability_topic": "efergy/5410eca5a92a/availability",
+    "expire_after": 30,
+    "device_class": "signal_strength",
+    "unit_of_measurement": "dBm",
+    "state_class": "measurement",
+    "entity_category": "diagnostic",
+    "value_template": "{{ value_json.rssi_dbm }}",
+    "device": {
+      "identifiers": [
+        "efergy_5410eca5a92a_827781"
+      ],
+      "name": "Efergy 827781",
+      "manufacturer": "Efergy",
+      "model": "e2 classic"
+    }
+  },
+  "homeassistant/sensor/efergy_5410eca5a92a_827781_power/config": {
+    "name": "Estimated power",
+    "unique_id": "efergy_5410eca5a92a_827781_power",
+    "state_topic": "efergy/5410eca5a92a/827781/state",
+    "availability_topic": "efergy/5410eca5a92a/availability",
+    "expire_after": 30,
+    "device_class": "power",
+    "unit_of_measurement": "W",
+    "state_class": "measurement",
+    "value_template": "{{ value_json.power_w }}",
+    "device": {
+      "identifiers": [
+        "efergy_5410eca5a92a_827781"
+      ],
+      "name": "Efergy 827781",
+      "manufacturer": "Efergy",
+      "model": "e2 classic"
+    }
+  },
+  "homeassistant/sensor/efergy_5410eca5a92a_827781_voltage/config": {
+    "name": "Assumed voltage",
+    "unique_id": "efergy_5410eca5a92a_827781_voltage",
+    "state_topic": "efergy/5410eca5a92a/827781/state",
+    "availability_topic": "efergy/5410eca5a92a/availability",
+    "expire_after": 30,
+    "device_class": "voltage",
+    "unit_of_measurement": "V",
+    "entity_category": "diagnostic",
+    "value_template": "{{ value_json.voltage_v }}",
+    "device": {
+      "identifiers": [
+        "efergy_5410eca5a92a_827781"
+      ],
+      "name": "Efergy 827781",
+      "manufacturer": "Efergy",
+      "model": "e2 classic"
+    }
+  }
+}

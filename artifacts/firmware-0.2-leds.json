@@ -1,0 +1,50 @@
+{
+  "stage": "0.2-leds",
+  "created_at": "2026-10-28T13:02:22.549385+00:00",
+  "image_sha256": "aa3e93f86c9620d0148c404d3e6614a07de481728735e4e111f928f4a1a19f49",
+  "compiler": "XC8 4.00",
+  "device_pack": "PIC18F-J_DFP 1.7.159",
+  "program_bytes": 52722,
+  "data_bytes": 3257,
+  "leds": {
+    "yellow": "RF3; radio capture, including invalid frames",
+    "green": "RD1; Ethernet RX/TX",
+    "pulse_ms": 125,
+    "color_and_polarity": "User visually confirmed colors and flashing are correct"
+  },
+  "verification": {
+    "target_build": "passed",
+    "radio_timing_audit": "77 cycles; unchanged",
+    "program_and_verify": "successful",
+    "target_power": "external; PICkit power disabled",
+    "hardware_last_status": {
+      "firmware": "0.2",
+      "ip": "192.168.23.13",
+      "fallback": 0,
+      "mac_fallback": 0,
+      "network_state": 1,
+      "network_pending": 0,
+      "flash_id": "bf258d",
+      "radio_captures": 2,
+      "valid_readings": 2,
+      "legacy_id": 827781,
+      "current_mantissa": 21913,
+      "current_shift": 10,
+      "interval": 6,
+      "battery_ok": 1,
+      "mqtt_state": 0,
+      "mqtt_error": 0,
+      "mqtt_tcp_phase": 0,
+      "broker_ip": "0.0.0.0",
+      "mqtt_reconnects": 0,
+      "mqtt_publications": 0,
+      "config_state": 0,
+      "config_error": 0,
+      "config_sequence": 13,
+      "radio_version": 36,
+      "capture_profile": 1,
+      "capture_bits": 96,
+      "capture_raw": "f35e7abfaa66fa9a"
+    }
+  }
+}

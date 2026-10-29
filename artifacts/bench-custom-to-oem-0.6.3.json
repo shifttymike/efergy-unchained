@@ -1,0 +1,16 @@
+{
+  "started_epoch": 1793270646.9113941,
+  "transport": "HTTP OTA only; no PICkit programming during this conversion",
+  "raw_staging": {
+    "state": 6,
+    "error": 0,
+    "offset": 131072
+  },
+  "result": "OEM 3.7.1 resumed genuine SSLv3 key/telemetry requests after network-only restore",
+  "network_restore_confirmed": true,
+  "pic_programmer_used": false,
+  "plain_oem_sha256": "613143553c43947337ac3a9ae3f9ebd40b1abccb53741bf73793646a9d55f6a0",
+  "oem_radio_data_posts_confirmed": true,
+  "returned_to_custom_0.6.3": true,
+  "post_reboot_mqtt_restored": true
+}

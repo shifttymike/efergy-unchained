@@ -1,0 +1,34 @@
+{
+  "date": "2026-10-29",
+  "hardware": "EH433M3v1 / PIC18F67J60 revision 3 / RFM69W / SST25VF040B",
+  "physical_units_tested": 1,
+  "transmitters_tested": 1,
+  "oem_version": "3.7.1",
+  "custom_version": "0.6.3",
+  "network_paths": {
+    "oem_to_custom": true,
+    "custom_to_oem": true,
+    "custom_to_newer_custom": true,
+    "full_round_trip_without_pic_programming": true
+  },
+  "oem_radio_telemetry_posts_verified": true,
+  "custom_reboot_and_mqtt_broker_state_verified": true,
+  "fallback_ip_verified": "192.168.123.1",
+  "exported_source_builds_and_matches_normal_and_converter_efu": true,
+  "host_checks": {
+    "normal_firmware": "passed",
+    "oem_restore_engine_and_http": "passed",
+    "c_oem_hex_generator_matches_packager": "passed",
+    "oem_transition": "passed",
+    "oem_server_tests": 5
+  },
+  "normal_program_bytes": 71962,
+  "normal_ram_bytes": 3471,
+  "loader_program_bytes": 5530,
+  "loader_ram_bytes": 208,
+  "release_converter_program_bytes": 66044,
+  "release_converter_ram_bytes": 3477,
+  "physical_power_cut_testing": false,
+  "project_license": "GPL-3.0-only (project-authored components; see LICENSE-SCOPE.md)",
+  "converter_release_note": "Restore implementation exercised on hardware; generic emergency-MAC/static-default cleanup was applied before rebuilding the release converter. Exported source reproduces the released binaries."
+}

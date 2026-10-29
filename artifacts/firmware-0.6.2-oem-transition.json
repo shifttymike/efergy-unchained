@@ -1,0 +1,15 @@
+{
+  "factory_sha256": "0985c5e2481ce84ba5078991467c2012fe3981ce56a58f8fe99bf3d423de20a3",
+  "package_sha256": "6cc73c8236412e48dff600420ae197f4a665a639ec7297e382d91d20a2340551",
+  "blob_bytes": 79162,
+  "blob_end": "0x1953a",
+  "initial_loader_replacement_power_fail_safe": false,
+  "version": "0.6.2",
+  "carrier_bytes": 229000,
+  "carrier_sha256": "1f74b4839559c0754246a460c9f09cc78b69100adf4c31416b51943d3ee88848",
+  "program_bytes": 4062,
+  "ram_bytes": 226,
+  "hardware_validated": true,
+  "transition_hardware_validated": true,
+  "conversion_result": "OEM 3.7.1 downloaded the carrier over the LXC, installed the converter, and booted clean 0.6.2; radio and broker connection restored"
+}

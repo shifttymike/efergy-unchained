@@ -1,0 +1,30 @@
+{
+  "version": "0.6.2",
+  "model": "0x18676069",
+  "application_base": "0x400",
+  "bootloader_base": "0x1cc00",
+  "application_bytes": 116736,
+  "payload_crc32": "e9f0d11c",
+  "package_sha256": "6cc73c8236412e48dff600420ae197f4a665a639ec7297e382d91d20a2340551",
+  "hardware_validated": true,
+  "oem_transition_validated": true,
+  "factory_sha256": "0985c5e2481ce84ba5078991467c2012fe3981ce56a58f8fe99bf3d423de20a3",
+  "created_at": "2026-10-29T09:20:31.340785+00:00",
+  "bootloader_fix": "Initialize and restore upper PIC table-pointer bank required by XC8 constant helpers",
+  "application_program_bytes": 71962,
+  "application_ram_bytes": 3471,
+  "bootloader_program_bytes": 5530,
+  "bootloader_ram_bytes": 208,
+  "hardware_note": "Equivalent bank-select fix tested with 0.6.0/0.6.1 applications; exact 0.6.2 bundle not yet flashed",
+  "supersedes": "0.6.0 factory bootloader",
+  "bench_results": {
+    "initial_snapshot": true,
+    "http_upload_0_6_1": true,
+    "trial_confirmation": true,
+    "confirmed_reboot": true,
+    "unconfirmed_trial_rollback": true,
+    "three_short_software_resets": true,
+    "physical_power_cuts": false
+  },
+  "validation_note": "Exact factory boot plus OEM-to-clean network conversion verified on one EH433M3v1 / OEM 3.7.1 device; no physical power-cut test"
+}

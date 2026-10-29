@@ -1,0 +1,11 @@
+{
+  "format": "WEB2",
+  "version": 1,
+  "encoding": "gzip",
+  "address": "0x51000",
+  "bytes": 5802,
+  "gzip_bytes": 5786,
+  "html_bytes": 15310,
+  "sha256": "a4c4a5c5817a2a90aac3b45c6e4882f9ca7f74071e121d4652e1ff20ca27dbff",
+  "gzip_crc32": "5e1f1afb"
+}

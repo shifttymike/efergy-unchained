@@ -1,0 +1,171 @@
+/Users/michael/Dev/efergy/firmware-clean/.toolchain/xc8-v4.00/bin/xc8-cc -mcpu=18F67J60 -mdfp=/Applications/microchip/mplabx/v6.20/packs/Microchip/PIC18F-J_DFP/1.7.159/xc8 -O2 -std=c99 -mwarn=-3 -mcodeoffset=0x400 -mrom=0x400-0x1cbff,0x1fff8-0x1ffff -Ibuild -Iinclude -Ivendor/microchip/include src/app_workspace.c src/board.c src/config.c src/config_store.c src/e2_decoder.c src/http_parser.c src/http_server.c src/main.c src/mqtt_client.c src/mqtt_codec.c src/network.c src/ota_format.c src/ota_store.c src/ota_update.c src/radio.c src/web_assets.c src/radio_capture.S vendor/microchip/src/ARP.c vendor/microchip/src/DHCP.c vendor/microchip/src/DNS.c vendor/microchip/src/ETH97J60.c vendor/microchip/src/Helpers.c vendor/microchip/src/ICMP.c vendor/microchip/src/IP.c vendor/microchip/src/StackTsk.c vendor/microchip/src/TCP.c vendor/microchip/src/Tick.c vendor/microchip/src/UDP.c vendor/microchip/src/Delay.c -o build/efergy.hex
+vendor/microchip/src/ETH97J60.c:208:30: warning: operator '>>' has lower precedence than '+'; '+' will be evaluated first [-Wshift-op-parentheses]
+  208 |     MAMXFLH = HIGH(6+6+2+1500+4); Nop();
+      |               ~~~~~~~~~~~~~~~^~~
+vendor/microchip/src/ETH97J60.c:80:23: note: expanded from macro 'HIGH'
+   80 | #define HIGH(a)                                 ((a>>8) & 0xFF)
+      |                                                   ^~~
+vendor/microchip/src/ETH97J60.c:208:30: note: place parentheses around the '+' expression to silence this warning
+  208 |     MAMXFLH = HIGH(6+6+2+1500+4); Nop();
+      |                    ~~~~~~~~~~^~
+vendor/microchip/src/ETH97J60.c:80:23: note: expanded from macro 'HIGH'
+   80 | #define HIGH(a)                                 ((a>>8) & 0xFF)
+      |                                                   ^
+vendor/microchip/src/ETH97J60.c:647:16: warning: implicit conversion loses integer precision: 'DWORD' (aka 'unsigned long') to 'WORD' (aka 'unsigned short') [-Wimplicit-int-conversion]
+  647 |         wTXWatchdog = TickGet();
+      |                     ~ ^~~~~~~~~
+2 warnings generated.
+vendor/microchip/src/Helpers.c:552:10: warning: using the result of an assignment as a condition without parentheses [-Wparentheses]
+  552 |         while(i = *str++)
+      |               ~~^~~~~~~~
+vendor/microchip/src/Helpers.c:552:10: note: place parentheses around the assignment to silence this warning
+  552 |         while(i = *str++)
+      |                 ^       
+      |               (         )
+vendor/microchip/src/Helpers.c:552:10: note: use '==' to turn this assignment into an equality comparison
+  552 |         while(i = *str++)
+      |                 ^
+      |                 ==
+vendor/microchip/src/Helpers.c:845:21: warning: implicit conversion loses integer precision: 'unsigned int' to 'BYTE' (aka 'unsigned char') [-Wimplicit-int-conversion]
+  845 |                                 *Buffer++ = '0' + Digit;
+      |                                           ~ ~~~~^~~~~~~
+vendor/microchip/src/Helpers.c:955:30: warning: implicit conversion loses integer precision: 'int' to 'BYTE' (aka 'unsigned char') [-Wimplicit-int-conversion]
+  955 |         return (AsciiChars.v[1]<<4) |  AsciiChars.v[0];
+      |         ~~~~~~ ~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~
+3 warnings generated.
+vendor/microchip/src/ICMP.c:174:23: warning: implicit conversion changes signedness: 'int' to 'unsigned short' [-Wsign-conversion]
+  174 |                 MACMemCopyAsync(-1, -1, len-4);
+      |                 ~~~~~~~~~~~~~~~     ^~
+vendor/microchip/src/ICMP.c:174:19: warning: implicit conversion changes signedness: 'int' to 'unsigned short' [-Wsign-conversion]
+  174 |                 MACMemCopyAsync(-1, -1, len-4);
+      |                 ~~~~~~~~~~~~~~~ ^~
+vendor/microchip/src/ICMP.c:175:29: warning: while loop has empty body [-Wempty-body]
+  175 |                 while(!MACIsMemCopyDone());
+      |                                           ^
+vendor/microchip/src/ICMP.c:175:29: note: put the semicolon on a separate line to silence this warning
+3 warnings generated.
+vendor/microchip/src/IP.c:164:43: warning: implicit conversion loses integer precision: 'int' to 'BYTE' (aka 'unsigned char') [-Wimplicit-int-conversion]
+  164 |         IPHeaderLen = (header.VersionIHL & 0x0f) << 2;
+      |                     ~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~
+1 warning generated.
+vendor/microchip/src/TCP.c:1107:16: warning: implicit conversion loses integer precision: 'TCP_STATE' to 'BYTE' (aka 'unsigned char') [-Wimplicit-int-conversion]
+ 1107 |         i = MyTCBStub.smState;
+      |           ~ ~~~~~~~~~~^~~~~~~
+vendor/microchip/src/TCP.c:2027:8: warning: implicit conversion loses integer precision: 'WORD' (aka 'unsigned short') to 'BYTE' (aka 'unsigned char') [-Wimplicit-int-conversion]
+ 2027 |                         k = wBytesUntilWrap;
+      |                           ~ ^~~~~~~~~~~~~~~
+vendor/microchip/src/TCP.c:2029:8: warning: implicit conversion loses integer precision: 'WORD' (aka 'unsigned short') to 'BYTE' (aka 'unsigned char') [-Wimplicit-int-conversion]
+ 2029 |                         k = wDataLen;
+      |                           ~ ^~~~~~~~
+vendor/microchip/src/TCP.c:2203:8: warning: implicit conversion loses integer precision: 'WORD' (aka 'unsigned short') to 'BYTE' (aka 'unsigned char') [-Wimplicit-int-conversion]
+ 2203 |                         k = wBytesUntilWrap;
+      |                           ~ ^~~~~~~~~~~~~~~
+vendor/microchip/src/TCP.c:2205:8: warning: implicit conversion loses integer precision: 'WORD' (aka 'unsigned short') to 'BYTE' (aka 'unsigned char') [-Wimplicit-int-conversion]
+ 2205 |                         k = wDataLen;
+      |                           ~ ^~~~~~~~
+vendor/microchip/src/TCP.c:2866:49: warning: implicit conversion changes signedness: 'int' to 'unsigned int' [-Wsign-conversion]
+ 2866 |         optionsSize = (BYTE)((TCPHeader.DataOffset.Val << 2)-
+      |                               ~~~~~~~~~~~~~~~~~~~~~~~~~^~~~ ~
+vendor/microchip/src/TCP.c:3341:43: warning: implicit conversion loses integer precision: 'DWORD' (aka 'unsigned long') to 'WORD' (aka 'unsigned short') [-Wimplicit-int-conversion]
+ 3341 |                         SYNQueue[wQueueInsertPos].wTimestamp = TickGetDiv256();
+      |                                                              ~ ^~~~~~~~~~~~~~~
+vendor/microchip/src/TCP.c:3367:43: warning: implicit conversion loses integer precision: 'DWORD' (aka 'unsigned long') to 'WORD' (aka 'unsigned short') [-Wimplicit-int-conversion]
+ 3367 |                         SYNQueue[wQueueInsertPos].wTimestamp = TickGetDiv256();
+      |                                                              ~ ^~~~~~~~~~~~~~~
+vendor/microchip/src/TCP.c:3763:33: warning: implicit conversion changes signedness: 'DWORD' (aka 'unsigned long') to 'LONG' (aka 'long') [-Wsign-conversion]
+ 3763 |         lMissingBytes = localSeqNumber - MyTCB.RemoteSEQ;
+      |                       ~ ~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~
+vendor/microchip/src/TCP.c:3866:43: warning: implicit conversion changes signedness: 'LONG' (aka 'long') to 'DWORD' (aka 'unsigned long') [-Wsign-conversion]
+ 3866 |             dwTemp = (LONG)localAckNumber - (LONG)dwTemp;
+      |                    ~ ~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~
+vendor/microchip/src/TCP.c:3882:27: warning: implicit conversion changes signedness: 'LONG' (aka 'long') to 'DWORD' (aka 'unsigned long') [-Wsign-conversion]
+ 3882 |                         dwTemp = MyTCB.MySEQ - (LONG)(SHORT)(MyTCB.txUnackedTail - MyTCBStub.txTail);
+      |                                              ~ ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+vendor/microchip/src/TCP.c:3930:23: warning: implicit conversion changes signedness: 'LONG' (aka 'long') to 'DWORD' (aka 'unsigned long') [-Wsign-conversion]
+ 3930 |                                                         MyTCB.MySEQ -= (LONG)(SHORT)(MyTCB.txUnackedTail - MyTCBStub.txTail);
+      |                                                                     ~~ ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+vendor/microchip/src/TCP.c:3932:24: warning: implicit conversion changes signedness: 'LONG' (aka 'long') to 'DWORD' (aka 'unsigned long') [-Wsign-conversion]
+ 3932 |                                                                 MyTCB.MySEQ -= (LONG)(SHORT)(MyTCBStub.bufferRxStart - MyTCBStub.bufferTxStart);
+      |                                                                             ~~ ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+vendor/microchip/src/TCP.c:4073:37: warning: implicit conversion changes signedness: 'int' to 'unsigned int' [-Wsign-conversion]
+ 4073 |                         IPSetRxBuffer((h->DataOffset.Val << 2) - wMissingBytes);
+      |                                        ~~~~~~~~~~~~~~~~~~^~~~  ~
+vendor/microchip/src/TCP.c:4102:43: warning: implicit conversion changes signedness: 'SHORT' (aka 'short') to 'unsigned int' [-Wsign-conversion]
+ 4102 |                                 wTemp = MyTCB.wFutureDataSize + MyTCB.sHoleSize;
+      |                                                               ~ ~~~~~~^~~~~~~~~
+vendor/microchip/src/TCP.c:4126:36: warning: implicit conversion changes signedness: 'int' to 'WORD' (aka 'unsigned short') [-Wsign-conversion]
+ 4126 |                         IPSetRxBuffer(h->DataOffset.Val << 2);
+      |                         ~~~~~~~~~~~~~ ~~~~~~~~~~~~~~~~~~^~~~
+vendor/microchip/src/TCP.c:4151:23: warning: implicit conversion changes signedness: 'WORD' (aka 'unsigned short') to 'SHORT' (aka 'short') [-Wsign-conversion]
+ 4151 |                                 MyTCB.sHoleSize = wMissingBytes;
+      |                                                 ~ ^~~~~~~~~~~~~
+vendor/microchip/src/TCP.c:4164:24: warning: implicit conversion changes signedness: 'WORD' (aka 'unsigned short') to 'SHORT' (aka 'short') [-Wsign-conversion]
+ 4164 |                                         MyTCB.sHoleSize = wMissingBytes;
+      |                                                         ~ ^~~~~~~~~~~~~
+vendor/microchip/src/TCP.c:4427:20: warning: implicit conversion changes signedness: 'SHORT' (aka 'short') to 'unsigned int' [-Wsign-conversion]
+ 4427 |                 ptrHead += MyTCB.sHoleSize + MyTCB.wFutureDataSize;
+      |                            ~~~~~~^~~~~~~~~ ~
+19 warnings generated.
+vendor/microchip/src/ETH97J60.c:338:: warning: (765) degenerate unsigned comparison
+vendor/microchip/src/ETH97J60.c:338:: warning: (757) constant conditional branch
+src/radio.c:23:: advisory: (1510) non-reentrant function "_transfer" appears in multiple call graphs and has been duplicated by the compiler
+src/radio.c:37:: advisory: (1510) non-reentrant function "_radio_read" appears in multiple call graphs and has been duplicated by the compiler
+src/radio.c:46:: advisory: (1510) non-reentrant function "_radio_write" appears in multiple call graphs and has been duplicated by the compiler
+/Users/michael/Dev/efergy/firmware-clean/.toolchain/xc8-v4.00/pic/sources/c99/common/memcpy.c:4:: advisory: (1510) non-reentrant function "_memcpy" appears in multiple call graphs and has been duplicated by the compiler
+/Users/michael/Dev/efergy/firmware-clean/.toolchain/xc8-v4.00/pic/sources/c99/common/memset.c:3:: advisory: (1510) non-reentrant function "_memset" appears in multiple call graphs and has been duplicated by the compiler
+src/board.c:197:: warning: (520) function "_ota_flash_wait" is never called
+src/ota_store.c:9:: warning: (520) function "_ota_append_sync" is never called
+src/ota_store.c:10:: warning: (520) function "_ota_slot_valid" is never called
+vendor/microchip/src/DHCP.c:346:: warning: (520) function "_DHCPIsEnabled" is never called
+vendor/microchip/src/DHCP.c:411:: warning: (520) function "_DHCPStateChanged" is never called
+vendor/microchip/src/DHCP.c:448:: warning: (520) function "_DHCPIsServerDetected" is never called
+vendor/microchip/src/DHCP.c:473:: warning: (520) function "_DHCPTempIPAddr" is never called
+vendor/microchip/src/ETH97J60.c:1357:: warning: (520) function "_MACPowerDown" is never called
+vendor/microchip/src/ETH97J60.c:1394:: warning: (520) function "_MACPowerUp" is never called
+vendor/microchip/src/Helpers.c:831:: warning: (520) function "_uitoa" is never called
+vendor/microchip/src/Helpers.c:935:: warning: (520) function "_hexatob" is never called
+vendor/microchip/src/Helpers.c:978:: warning: (520) function "_btohexa_high" is never called
+vendor/microchip/src/Helpers.c:1004:: warning: (520) function "_btohexa_low" is never called
+vendor/microchip/src/Helpers.c:1034:: warning: (520) function "_stricmppgm2ram" is never called
+vendor/microchip/src/Helpers.c:1221:: warning: (520) function "_strupr" is never called
+vendor/microchip/src/Helpers.c:1273:: warning: (520) function "_leftRotateDWORD" is never called
+vendor/microchip/src/Helpers.c:1346:: warning: (520) function "_FormatNetBIOSName" is never called
+vendor/microchip/src/Helpers.c:1396:: warning: (520) function "_strnchr" is never called
+vendor/microchip/src/Helpers.c:1443:: warning: (520) function "_strncpy_m" is never called
+vendor/microchip/src/TCP.c:1004:: warning: (520) function "_TCPGetRemoteInfo" is never called
+vendor/microchip/src/TCP.c:1158:: warning: (520) function "_TCPPut" is never called
+vendor/microchip/src/TCP.c:1359:: warning: (520) function "_TCPPutROMArray" is never called
+vendor/microchip/src/TCP.c:1483:: warning: (520) function "_TCPPutString" is never called
+vendor/microchip/src/TCP.c:1518:: warning: (520) function "_TCPPutROMString" is never called
+vendor/microchip/src/TCP.c:1540:: warning: (520) function "_TCPGetTxFIFOFull" is never called
+vendor/microchip/src/TCP.c:1584:: warning: (520) function "_TCPDiscard" is never called
+vendor/microchip/src/TCP.c:1709:: warning: (520) function "_TCPGetArray" is never called
+vendor/microchip/src/TCP.c:1778:: warning: (520) function "_TCPGetRxFIFOFree" is never called
+vendor/microchip/src/TCP.c:1849:: warning: (520) function "_TCPPeekArray" is never called
+vendor/microchip/src/TCP.c:1919:: warning: (520) function "_TCPPeek" is never called
+vendor/microchip/src/TCP.c:1978:: warning: (520) function "_TCPFindArrayEx" is never called
+vendor/microchip/src/TCP.c:2154:: warning: (520) function "_TCPFindROMArrayEx" is never called
+vendor/microchip/src/TCP.c:2328:: warning: (520) function "_TCPFindEx" is never called
+vendor/microchip/src/TCP.c:4357:: warning: (520) function "_TCPAdjustFIFOSize" is never called
+vendor/microchip/src/TCP.c:4692:: warning: (520) function "_TCPRAMCopyROM" is never called
+vendor/microchip/src/Tick.c:343:: warning: (520) function "_TickGetDiv64K" is never called
+vendor/microchip/src/Tick.c:384:: warning: (520) function "_TickConvertToMilliseconds" is never called
+vendor/microchip/src/UDP.c:468:: warning: (520) function "_UDPIsOpened" is never called
+vendor/microchip/src/UDP.c:891:: warning: (520) function "_UDPPutString" is never called
+vendor/microchip/src/UDP.c:925:: warning: (520) function "_UDPPutROMString" is never called
+vendor/microchip/src/Delay.c:57:: warning: (520) function "_DelayMs" is never called
+
+18F67J60 Memory Summary:
+    Program space        used 11896h ( 71830) of 1C802h bytes   ( 61.5%)
+    Data space           used   D8Fh (  3471) of   EE0h bytes   ( 91.2%)
+    Configuration bits   used     3h (     3) of     3h words   (100.0%)
+
+python3 tools/package_firmware.py build/efergy.hex
+/Users/michael/Dev/efergy/firmware-clean/.toolchain/xc8-v4.00/bin/xc8-cc -mcpu=18F67J60 -mdfp=/Applications/microchip/mplabx/v6.20/packs/Microchip/PIC18F-J_DFP/1.7.159/xc8 -O2 -std=c99 -mwarn=-3 -mcodeoffset=0x1cc00 -mrom=0-0x3ff,0x1cc00-0x1ffff -Iinclude -Ibuild bootloader/main.c bootloader/boot_flow.c bootloader/vectors.S src/ota_format.c src/ota_store.c -o build/bootloader.hex
+
+18F67J60 Memory Summary:
+    Program space        used  1584h (  5508) of  37F8h bytes   ( 38.4%)
+    Data space           used    CEh (   206) of   EE0h bytes   (  5.4%)
+    Configuration bits   used     3h (     3) of     3h words   (100.0%)
+
+python3 tools/package_firmware.py build/efergy.hex --bootloader build/bootloader.hex

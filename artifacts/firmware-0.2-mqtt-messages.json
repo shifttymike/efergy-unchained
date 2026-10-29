@@ -1,0 +1,58 @@
+[
+  {
+    "topic": "efergy/5410eca5a92a/availability",
+    "payload": "online"
+  },
+  {
+    "topic": "efergy/5410eca5a92a/827781/state",
+    "payload": {
+      "transmitter_id": 827781,
+      "current_a": 5.75,
+      "battery_ok": true,
+      "interval": 6,
+      "learn": false
+    }
+  },
+  {
+    "topic": "homeassistant/sensor/efergy_5410eca5a92a_827781_current/config",
+    "payload": {
+      "name": "Current",
+      "unique_id": "efergy_5410eca5a92a_827781_current",
+      "state_topic": "efergy/5410eca5a92a/827781/state",
+      "availability_topic": "efergy/5410eca5a92a/availability",
+      "expire_after": 30,
+      "device_class": "current",
+      "unit_of_measurement": "A",
+      "state_class": "measurement",
+      "value_template": "{{ value_json.current_a }}",
+      "device": {
+        "identifiers": [
+          "efergy_5410eca5a92a_827781"
+        ],
+        "name": "Efergy 827781",
+        "manufacturer": "Efergy",
+        "model": "e2 classic"
+      }
+    }
+  },
+  {
+    "topic": "homeassistant/binary_sensor/efergy_5410eca5a92a_827781_battery/config",
+    "payload": {
+      "name": "Battery",
+      "unique_id": "efergy_5410eca5a92a_827781_battery",
+      "state_topic": "efergy/5410eca5a92a/827781/state",
+      "availability_topic": "efergy/5410eca5a92a/availability",
+      "expire_after": 30,
+      "device_class": "battery",
+      "value_template": "{{ 'OFF' if value_json.battery_ok else 'ON' }}",
+      "device": {
+        "identifiers": [
+          "efergy_5410eca5a92a_827781"
+        ],
+        "name": "Efergy 827781",
+        "manufacturer": "Efergy",
+        "model": "e2 classic"
+      }
+    }
+  }
+]

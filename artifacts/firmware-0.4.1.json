@@ -1,0 +1,85 @@
+{
+  "stage": "0.4.1-polling-contention",
+  "created_at": "2026-10-28T17:10:33.980156+00:00",
+  "compiler": "XC8 4.00",
+  "device_pack": "PIC18F-J_DFP 1.7.159",
+  "program_bytes": 61368,
+  "data_bytes": 3310,
+  "image_sha256": "f30e8bbde9d39519011bf81b3924e31c2a8847b96884255630e5b64659555015",
+  "program_and_verify": "successful",
+  "target_power": "external; PICkit power disabled",
+  "polling": {
+    "delay_after_completion_ms": 3000,
+    "jitter_ms": [
+      0,
+      500
+    ],
+    "failure_backoff_ms": [
+      6000,
+      12000,
+      15000
+    ],
+    "hidden_pages": "paused; immediate refresh when shown",
+    "single_request_per_viewer": true
+  },
+  "hardware_test": {
+    "simulated_viewers": 2,
+    "duration_seconds": 60,
+    "requests": 40,
+    "failures": 0,
+    "max_response_seconds": 0.619,
+    "median_response_seconds": 0.055,
+    "valid_readings_received": 9,
+    "mqtt_publications_added": 9
+  },
+  "hardware_final_status": {
+    "firmware": "0.4.1",
+    "ip": "192.168.23.13",
+    "fallback": 0,
+    "mac_fallback": 0,
+    "network_state": 1,
+    "network_pending": 0,
+    "flash_id": "bf258d",
+    "radio_captures": 21,
+    "valid_readings": 20,
+    "legacy_id": 827781,
+    "current_mantissa": 19541,
+    "current_shift": 12,
+    "interval": 6,
+    "battery_ok": 1,
+    "mqtt_state": 4,
+    "mqtt_error": 0,
+    "mqtt_tcp_phase": 7,
+    "broker_ip": "10.40.0.9",
+    "mqtt_reconnects": 1,
+    "mqtt_publications": 26,
+    "config_state": 0,
+    "config_error": 0,
+    "config_sequence": 18,
+    "radio_version": 36,
+    "capture_profile": 1,
+    "capture_bits": 64,
+    "capture_raw": "f35e7abfb3aafce9",
+    "rssi_raw": 182,
+    "voltage_v": 230,
+    "web_state": 0
+  },
+  "test_evidence": "firmware-0.4.1-two-viewers.json",
+  "host_tests": "make check and UI scheduler regression passed",
+  "web_assets": {
+    "format": "WEB2",
+    "version": 1,
+    "encoding": "gzip",
+    "address": "0x51000",
+    "bytes": 4380,
+    "gzip_bytes": 4364,
+    "html_bytes": 11577,
+    "sha256": "bcbc1e9f69d23f7c4cfb687e2646ce62a013708bec1a0ac37e77bf3fe3a06ceb",
+    "gzip_crc32": "65fb437c"
+  },
+  "limits": [
+    "One HTTP connection remains; no long polling or concurrent request parser was added",
+    "One-minute simulated-viewer check is not a long soak or proof for arbitrary clients",
+    "Open pages must reload to replace their existing one-second JavaScript"
+  ]
+}

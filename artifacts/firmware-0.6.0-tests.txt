@@ -1,0 +1,61 @@
+python3 tools/package_firmware.py build/efergy.hex
+clang -std=c99 -Wall -Wextra -Werror -fsanitize=address,undefined -Iinclude tests/test_core.c src/e2_decoder.c src/radio_sampler.c -o build/test_core
+./build/test_core
+core: decoder vectors, inversion, checksum/length rejection, sampled PWM and capture bound passed
+clang -std=c99 -Wall -Wextra -Werror -fsanitize=address,undefined -Iinclude tests/test_protocol.c src/config.c src/mqtt_codec.c -o build/test_protocol
+./build/test_protocol
+protocol: config CRC/commit/wrap, bounded MQTT CONNECT/PUBLISH and fragmented control packets passed
+clang -std=c99 -Wall -Wextra -Werror -fsanitize=address,undefined -Iinclude tests/test_http.c src/http_parser.c src/config.c -o build/test_http
+./build/test_http
+HTTP: fragmented input, framing/size rejection, bounded config patches and credential semantics passed
+clang -std=c99 -Wall -Wextra -Werror -fsanitize=address,undefined -DCONFIG_WRITES_ENABLED=1 -DEFERGY_HOST_TEST -Iinclude tests/test_store.c src/config_store.c src/config.c src/app_workspace.c -o build/test_store
+./build/test_store
+storage: 650 reset boundaries, commit ordering, alternating slots, write failure and busy timeout passed
+clang -std=c99 -Wall -Wextra -Werror -fsanitize=address,undefined -Itests/stubs -Iinclude tests/test_mqtt_client.c src/mqtt_client.c src/mqtt_codec.c src/config.c src/app_workspace.c -o build/test_mqtt_client
+./build/test_mqtt_client
+MQTT client: fragmented handshake, retained discovery/state, keepalive, reconnect, auth refusal and cache bounds passed
+python3 -c 'import json,pathlib; [json.loads(p.read_text()) for p in pathlib.Path("build").glob("*-test.json")]; print("MQTT discovery/state JSON parsed")'
+MQTT discovery/state JSON parsed
+clang -std=c99 -Wall -Wextra -Werror -fsanitize=address,undefined -Itests/stubs -Iinclude tests/test_network.c src/network.c src/config.c -o build/test_network
+./build/test_network
+network: DHCP/lease loss, static probes, conflict withdrawal, link recovery and deferred network changes passed
+python3 tests/test_ipv4.py
+IPv4: exact vendor helper accepts full quads and rejects partial numeric hosts
+python3 tests/test_dhcp_hostname.py
+DHCP: exact sender advertises option 12 efergyhub in DISCOVER, REQUEST and renewal packets
+python3 tests/test_radio_timing.py
+radio timing: every sample path reaches Timer3 poll within 77 cycles; no inner loops
+clang -std=c99 -Wall -Wextra -Werror -fsanitize=address,undefined -Itests/stubs -Iinclude tests/test_http_server.c src/http_server.c src/http_parser.c src/config.c src/app_workspace.c -o build/test_http_server
+./build/test_http_server 0
+HTTP reboot: response ACK, immediate peer FIN and incomplete response cases passed
+./build/test_http_server 1
+HTTP reboot: response ACK, immediate peer FIN and incomplete response cases passed
+./build/test_http_server 2
+HTTP reboot: response ACK, immediate peer FIN and incomplete response cases passed
+./build/test_http_server 3
+HTTP reboot: response ACK, immediate peer FIN and incomplete response cases passed
+./build/test_http_server 4
+HTTP reboot: response ACK, immediate peer FIN and incomplete response cases passed
+./build/test_http_server 5
+HTTP reboot: response ACK, immediate peer FIN and incomplete response cases passed
+./build/test_http_server 6
+HTTP reboot: response ACK, immediate peer FIN and incomplete response cases passed
+clang -std=c99 -Wall -Wextra -Werror -fsanitize=address,undefined -Ibuild -Itests/stubs -Iinclude tests/test_web_assets.c src/web_assets.c -o build/test_web_assets
+./build/test_web_assets
+web assets: two-sector bounds, commit-last, reboot reuse, interrupted install, corruption repair, lock and timeout passed
+python3 tests/test_assets.py
+UI image: gzip roundtrip, length, CRC and committed header passed
+node tests/test_ui_polling.js
+UI polling: completion-based 3s schedule, no overlap, bounded retry backoff, recovery and hidden-page pause passed
+node tests/test_ui_history.js
+Power history: unique readings, unchanged watts, voltage snapshots, gaps/restart/wrap, one-hour pruning, late CDN loading and no extra requests passed
+clang -O2 -std=c99 -Wall -Wextra -Werror -fsanitize=address,undefined -Iinclude -Ibuild tests/test_ota_boot.c bootloader/boot_flow.c src/ota_format.c src/ota_store.c -o build/test_ota_boot
+./build/test_ota_boot
+Initial snapshot: 15 interrupted seed/commit boundaries recovered
+Journal rotation: all 33 interrupted erase/program boundaries retained a valid record
+Boot flow: 178 interrupted installs, fixed-region preservation, initial snapshot, trial rollback, bad-image rejection and power-cycle recovery passed
+clang -O2 -std=c99 -Wall -Wextra -Werror -fsanitize=address,undefined -Itests/stubs -Iinclude tests/test_ota_update.c src/ota_update.c src/ota_format.c src/ota_store.c -o build/test_ota_update
+./build/test_ota_update
+OTA updater: streamed full image/readback, bounds/order checks, locks, abort, corrupt CRC refusal, flash timeout, durable commit and trial confirmation/deadline passed
+python3 tests/test_ota_package.py
+OTA package: real linker region separation, permanent vectors, silicon unlock bytes, model/size/CRC validation and factory merge passed

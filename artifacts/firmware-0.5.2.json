@@ -1,0 +1,14 @@
+{
+  "firmware": "0.5.2",
+  "created_at": "2026-10-29T06:42:45.354126+00:00",
+  "image_sha256": "a9a36bd1b01d9fe5b7d80ad517d5a4e5ec9b21a7f20cce6ccd0d28bf255c84ea",
+  "program_bytes": 62942,
+  "data_bytes": 3294,
+  "change": "Compiled default fallback IP 192.168.123.1/24; existing saved configuration takes precedence",
+  "gateway_dns_defaults": "unchanged: 192.168.23.254",
+  "host_tests": "make check passed, including DHCP timeout/static ARP probing/conflict handling with new default address",
+  "flashed": false,
+  "installed_firmware": "0.5.1",
+  "installed_saved_fallback": "192.168.23.6/24",
+  "live_device_configuration_modified": false
+}

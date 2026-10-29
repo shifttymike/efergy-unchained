@@ -1,0 +1,27 @@
+{
+  "changed_bytes": 388,
+  "changed_sectors": [
+    "0x4f000",
+    "0x50000"
+  ],
+  "outside_config_sectors_unchanged": true,
+  "original_sha256": "2922e51950a7fe2ba355939e6ae4d5ccccccce5d7642b65cfdb02c462953c6d7",
+  "after_sha256": "94fa987c1499667103248cbd334af9152cf4d01638a8ad875e723395a8120155",
+  "config_sequence": 7,
+  "radio_before": 25,
+  "radio_after": 25,
+  "slots": [
+    {
+      "address": "0x4f000",
+      "sequence": 7,
+      "crc_valid": true,
+      "commit_valid": true
+    },
+    {
+      "address": "0x50000",
+      "sequence": 6,
+      "crc_valid": true,
+      "commit_valid": true
+    }
+  ]
+}
