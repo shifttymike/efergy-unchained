@@ -1,5 +1,6 @@
 /.toolchain/
 /build/
+/artifacts/
 *.o
 *.d
 *.p1
@@ -16,11 +17,11 @@
 *.elf
 *.hex
 !/recovery/*.hex
+!/binaries/**/*.hex
 /recovery/*.bin
 # Local OEM copies and readbacks are recovery evidence, not release artifacts.
 /recovery/oem-*.hex
 /recovery/post-oem-*.hex
-!/artifacts/*.hex
 *.log
 **/.DS_Store
 
