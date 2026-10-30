@@ -33,7 +33,7 @@ not power-fail safe.
 
 5. Find the gateway's DHCP lease (`efergyhub`) and open `http://GATEWAY_IP/status`.
    Confirm `firmware` is `0.6.3`, `network_state` is `1`, and `mqtt_state` is `4`.
-   A `/firmware.hex` request or delivery marker alone does not confirm installation.
+   A `/firmware.hex` request alone does not confirm installation.
 6. Stop the server after the gateway finishes:
 
    ```sh
@@ -44,24 +44,21 @@ The Docker service distributes OEM-format images; it is not a telemetry receiver
 
 ### Retry after an incomplete update
 
-The server records one delivery marker per gateway and image. After it serves
-`/firmware.hex`, it will not offer that same image to that gateway again. The
-marker proves transfer only. If the gateway still runs OEM firmware, keep stable
-external power, power off the gateway, then clear only its matching marker before
-starting it again. Run this from `oem-server/`; replace the example MAC with the
-gateway's MAC in uppercase without separators:
+After serving `/firmware.hex`, the backend holds an in-memory lock for that
+gateway and image. This prevents repeated offers while the backend container is
+running. The lock clears automatically when that container restarts; no marker
+files are written. If conversion did not complete and the gateway still runs OEM
+firmware, wait until it has settled, then restart the backend. The gateway does
+not need to be restarted:
 
 ```sh
-MAC=001122AABBCC
-IMAGE_ID=$(python3 -c 'import hashlib,pathlib; print(hashlib.sha256(pathlib.Path("images/firmware.hex").read_bytes()).hexdigest()[:16])')
-rm -f "logs/delivered-${MAC}-${IMAGE_ID}.json"
-docker compose up -d
+docker compose restart backend
 ```
 
-Wait for `/health` to return `OK`, then power on the gateway. Do not remove power
-while the OEM loader or conversion code is writing flash. After the gateway
-reboots, verify `/status` reports custom firmware before considering the update
-complete.
+The image will be offered on the gateway's next check-in. Do not restart the
+backend during a firmware transfer or while conversion code is writing flash.
+After the gateway reboots, verify `/status` reports custom firmware before
+considering the update complete.
 
 ## OEM 3.7.1 to HTTP-only OEM
 

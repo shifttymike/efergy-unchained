@@ -17,9 +17,10 @@ spec.loader.exec_module(server)
 
 
 class HTTPService(unittest.TestCase):
-    def test_image_delivery_and_tracking(self):
+    def test_image_delivery_and_process_lifetime_lock(self):
         previous = {key: os.environ.get(key) for key in ["IMAGE_PATH", "OEM_COMMAND"]}
         old_logs = server.LOG_DIR
+        server.DELIVERED.clear()
         with tempfile.TemporaryDirectory() as directory:
             root = pathlib.Path(directory)
             image = root / "image.hex"
@@ -53,9 +54,13 @@ class HTTPService(unittest.TestCase):
                 self.assertEqual(request("/firmware.hex", "update")[1], b"first-image")
                 self.assertEqual(request("/h3")[1], b"200")
 
-                # A different device and a changed image each receive a new offer.
+                # A different device and a changed image each receive an offer.
                 self.assertTrue(request("/h3", mac="2B.A9.A5.5410EC")[1].endswith(b"HEXFILE"))
                 image.write_bytes(b"second-image")
+                self.assertTrue(request("/h3")[1].endswith(b"HEXFILE"))
+
+                # Restarting the backend process clears the in-memory lock.
+                server.DELIVERED.clear()
                 self.assertTrue(request("/h3")[1].endswith(b"HEXFILE"))
 
                 image.unlink()
@@ -68,6 +73,7 @@ class HTTPService(unittest.TestCase):
                 httpd.server_close()
                 thread.join()
                 server.LOG_DIR = old_logs
+                server.DELIVERED.clear()
                 for key, value in previous.items():
                     if value is None:
                         os.environ.pop(key, None)

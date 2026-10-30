@@ -1,9 +1,12 @@
 """OEM bench server. Observation mode by default; no firmware bundled."""
 import hashlib,json,os,re,time
+from threading import Lock
 from http.server import BaseHTTPRequestHandler,ThreadingHTTPServer
 from pathlib import Path
 LOG_DIR=Path(os.environ.get('LOG_DIR','/logs'))
 SALT='6ya!89'
+DELIVERED=set()
+DELIVERED_LOCK=Lock()
 def host_mac(host):
     first=host.split(':')[0].split('.')[:4]
     # OEM hostname is MAC[5].MAC[4].MAC[3].MAC[0:3], not flat MAC order.
@@ -13,9 +16,12 @@ def command_body(mac,timestamp,version,command='HEXFILE'):
     ts=int(timestamp.split(':')[0],16)
     text=f'{mac.upper()}{SALT}{ts:08X}{SALT}{version}{SALT}{command}{SALT}'
     return hashlib.md5(text.encode('ascii')).hexdigest().encode()+command.encode()
-def delivery_marker(mac,data):
-    # Progress tracking only: all local devices may request the same image.
-    return LOG_DIR/('delivered-'+(mac or 'unknown')+'-'+hashlib.sha256(data).hexdigest()[:16]+'.json')
+def delivery_key(mac,data):
+    return mac,hashlib.sha256(data).digest()
+def was_delivered(key):
+    with DELIVERED_LOCK:return key in DELIVERED
+def mark_delivered(key):
+    with DELIVERED_LOCK:DELIVERED.add(key)
 class Handler(BaseHTTPRequestHandler):
     protocol_version='HTTP/1.1'
     wbufsize=65536
@@ -35,13 +41,15 @@ class Handler(BaseHTTPRequestHandler):
         if self.path=='/health':return self.reply(b'OK')
         image=Path(os.environ.get('IMAGE_PATH','/images/firmware.hex'))
         data=image.read_bytes() if image.is_file() else None
-        delivered=data is not None and delivery_marker(mac,data).exists()
+        key=delivery_key(mac,data) if data is not None and mac is not None else None
+        delivered=key is not None and was_delivered(key)
         if self.path=='/get_key.html':return self.reply(b'TT|a1bCDEFGHa1zZ\n')
         if self.path.startswith('/check_key.html'):return self.reply(b'success')
         if self.path=='/firmware.hex':
             if data is None:return self.reply(b'',404)
-            self.reply(data);event=json.dumps({'time':time.time(),'sha256':hashlib.sha256(data).hexdigest(),'mac':mac})
-            delivery_marker(mac,data).write_text(event);(LOG_DIR/'delivered.json').write_text(event);return
+            self.reply(data)
+            if key is not None:mark_delivered(key)
+            return
         if '.update.' in host and self.command=='GET':
             if data is None:return self.reply(b'')
             # OEM splits URL: at the first slash; no http:// scheme is allowed.

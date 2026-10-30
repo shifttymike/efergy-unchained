@@ -14,7 +14,7 @@ APP_CONFIG AppConfig;
 uint8_t app_network_ready,app_reboot_requested;
 static reading_t last_reading;
 static radio_frame_t incoming_frame;
-static uint16_t valid_readings;
+static uint32_t valid_readings;
 static uint8_t mac_fallback;
 static uint32_t flash_jedec;
 void __interrupt(high_priority) high_isr(void) {
@@ -31,16 +31,21 @@ uint16_t app_format_status(char *out,uint16_t capacity)
 #ifdef OEM_RESTORE_BUILD
     return (uint16_t)snprintf(out,capacity,"{\"firmware\":\"" EFERGY_FIRMWARE_VERSION "\",\"converter\":true,\"ip\":\"%u.%u.%u.%u\"}",AppConfig.MyIPAddr.v[0],AppConfig.MyIPAddr.v[1],AppConfig.MyIPAddr.v[2],AppConfig.MyIPAddr.v[3]);
 #else
+    uint8_t high_interrupts_enabled=INTCONbits.GIEH;
+    uint32_t capture_count;
+    INTCONbits.GIEH=0;
+    capture_count=radio_captures;
+    INTCONbits.GIEH=high_interrupts_enabled;
     return (uint16_t)snprintf(out,capacity,
         "{\"firmware\":\"" EFERGY_FIRMWARE_VERSION "\",\"ip\":\"%u.%u.%u.%u\",\"fallback\":%u,\"mac_fallback\":%u,\"network_state\":%u,\"network_pending\":%u,"
-        "\"flash_id\":\"%06lx\",\"radio_captures\":%u,\"valid_readings\":%u,\"legacy_id\":%lu,"
+        "\"flash_id\":\"%06lx\",\"radio_captures\":%lu,\"valid_readings\":%lu,\"legacy_id\":%lu,"
         "\"current_mantissa\":%u,\"current_shift\":%u,\"interval\":%u,\"battery_ok\":%u,"
         "\"mqtt_state\":%u,\"mqtt_error\":%u,\"mqtt_tcp_phase\":%u,\"broker_ip\":\"%u.%u.%u.%u\",\"mqtt_reconnects\":%u,\"mqtt_publications\":%u,"
         "\"config_state\":%u,\"config_error\":%u,\"config_sequence\":%lu,"
         "\"radio_version\":%u,\"capture_profile\":%u,\"capture_bits\":%u,"
         "\"capture_raw\":\"%02x%02x%02x%02x%02x%02x%02x%02x\",\"rssi_raw\":%u,\"voltage_v\":%u,\"web_state\":%u}",
         AppConfig.MyIPAddr.v[0],AppConfig.MyIPAddr.v[1],AppConfig.MyIPAddr.v[2],AppConfig.MyIPAddr.v[3],
-        network_fallback,mac_fallback,network_state,network_config_pending(),(unsigned long)flash_jedec,radio_captures,valid_readings,(unsigned long)last_reading.legacy_id,
+        network_fallback,mac_fallback,network_state,network_config_pending(),(unsigned long)flash_jedec,(unsigned long)capture_count,(unsigned long)valid_readings,(unsigned long)last_reading.legacy_id,
         last_reading.current_mantissa,last_reading.current_divisor_shift,last_reading.interval_s,last_reading.battery_ok,
         mqtt_state,mqtt_error,mqtt_tcp_phase,(unsigned)(mqtt_resolved_ip&255u),(unsigned)((mqtt_resolved_ip>>8)&255u),
         (unsigned)((mqtt_resolved_ip>>16)&255u),(unsigned)(mqtt_resolved_ip>>24),mqtt_reconnects,mqtt_publications,

@@ -25,7 +25,7 @@ function sample(count,voltage=230){ctx.recordHistory({...empty,valid_readings:co
  script.onload();assert.equal(drawn.data.datasets.length,1);assert.equal(drawn.data.datasets[0].label,'Estimated power');assert.equal(drawn.data.datasets[0].data.length,3);
  now+=6000;sample(6);assert.equal(history().at(-2).power,null);assert.equal(history().at(-1).count,6);
  now+=6000;ctx.recordHistory(empty,now);sample(1);assert.equal(history().at(-2).power,null); // Restart after observing empty startup.
- now+=6000;sample(65535);now+=6000;sample(0);assert.equal(history().at(-2).power,230);assert.equal(history().at(-1).count,0); // 16-bit wrap.
+ now+=6000;sample(4294967295);now+=6000;sample(0);assert.equal(history().at(-2).power,230);assert.equal(history().at(-1).count,0); // 32-bit wrap.
  now=1700003600001;ctx.drawHistory(now);assert(history().every(p=>p.t>=now-3600000));
  now+=3600001;ctx.drawHistory(now);assert.equal(history().length,0);
  script.onerror();assert(document.getElementById('chart_note').textContent.includes('Live readings'));

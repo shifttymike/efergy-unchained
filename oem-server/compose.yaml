@@ -19,5 +19,25 @@ services:
     volumes:
       - legacy-cert:/cert
     restart: "no"
+  lan-dns-dhcp:
+    profiles: ["lan"]
+    build: ./lan-services
+    network_mode: host
+    cap_add:
+      - NET_ADMIN
+      - NET_RAW
+    environment:
+      LAN_INTERFACE: "${LAN_INTERFACE:-}"
+      UPDATE_SERVER_IP: "${UPDATE_SERVER_IP:-}"
+      DHCP_RANGE_START: "${DHCP_RANGE_START:-}"
+      DHCP_RANGE_END: "${DHCP_RANGE_END:-}"
+      DHCP_NETMASK: "${DHCP_NETMASK:-}"
+      DHCP_ROUTER: "${DHCP_ROUTER:-}"
+      UPSTREAM_DNS: "${UPSTREAM_DNS:-}"
+    volumes:
+      - ./lan-services/state:/var/lib/misc
+    depends_on:
+      - backend
+    restart: "no"
 volumes:
   legacy-cert:

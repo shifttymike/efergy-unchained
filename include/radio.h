@@ -37,6 +37,7 @@ uint8_t radio_take(radio_frame_t *frame);
 void radio_interrupt(void);
 uint8_t radio_read(uint8_t reg);
 void radio_write(uint8_t reg, uint8_t value);
-extern volatile uint16_t radio_captures, radio_overruns;
+extern volatile uint32_t radio_captures;
+extern volatile uint16_t radio_overruns;
 extern uint8_t radio_version;
 #endif

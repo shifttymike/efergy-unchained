@@ -84,8 +84,10 @@ sensor for best-effort cumulative kWh. MQTT uses QoS 0, so disconnected periods
 and missed RF readings are not backfilled.
 
 Yellow pulses indicate radio capture activity, including invalid captures.
-Green pulses indicate network RX/TX. `/status` capture/publication counters are
-16-bit counters and can wrap; they are not durable lifetime totals or uptime.
+Green pulses indicate network RX/TX. `/status` radio-capture and valid-reading
+counters are 32-bit boot-relative counters. At a six-second reporting interval,
+the valid-reading counter would take about 817 years to wrap. A device reboot
+starts both counters from zero; they are not persisted lifetime totals or uptime.
 
 ## Requesting the previous custom image
 

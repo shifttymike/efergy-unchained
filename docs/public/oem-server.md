@@ -39,20 +39,40 @@ from the gateway. Keep `uk.pool.ntp.org` on normal DNS for the HTTP-only patch.
 Wait for `curl --fail http://127.0.0.1/health` to return `OK`, then power on the
 gateway. Keep stable external power while the OEM loader installs the image.
 
-After the gateway reboots, verify installation at `http://GATEWAY_IP/status`;
-for the custom image, confirm `firmware` is `0.6.3`, `network_state` is `1`, and
-`mqtt_state` is `4`. A request for `/firmware.hex` and its delivery marker only
-confirm transfer. Stop the server with `docker compose down` after verification.
+## Optional DHCP and DNS
 
-Each device/image pair is offered once. To retry after an incomplete update,
-power off the gateway, then from `oem-server/` clear its marker before powering
-it on again:
+The `lan` Compose profile starts dnsmasq on the host network. It offers DHCP
+leases and resolves `sensornet.info` and its subdomains to the update server.
+Use this only on an isolated lab network/VLAN or after disabling the existing
+DHCP server on that network. Two DHCP servers on one LAN can issue conflicting
+addresses and gateways.
+
+Copy `oem-server/.env.example` to `oem-server/.env` and set the host interface,
+update-server IP, DHCP range, subnet mask, router and upstream DNS for that LAN.
+Then start the stack with:
 
 ```sh
-MAC=001122AABBCC
-IMAGE_ID=$(python3 -c 'import hashlib,pathlib; print(hashlib.sha256(pathlib.Path("images/firmware.hex").read_bytes()).hexdigest()[:16])')
-rm -f "logs/delivered-${MAC}-${IMAGE_ID}.json"
+docker compose --profile lan up --build -d
 ```
 
-Use the gateway MAC in uppercase without separators. See
+Without `--profile lan`, DHCP and DNS are not started. On Linux, ensure the host
+interface and ports 53/67 are available to dnsmasq. Docker Desktop host networking
+does not provide the LAN broadcast access needed for DHCP.
+
+After the gateway reboots, verify installation at `http://GATEWAY_IP/status`;
+for the custom image, confirm `firmware` is `0.6.3`, `network_state` is `1`, and
+`mqtt_state` is `4`. A request for `/firmware.hex` only confirms transfer. Stop
+the server with `docker compose down` after verification.
+
+After serving an image, the backend holds an in-memory lock per device and image
+until the backend container restarts. No delivery marker files are written. To
+retry after an incomplete update, wait until the gateway has settled, then restart
+the backend; the hub does not need to be restarted:
+
+```sh
+docker compose restart backend
+```
+
+The image is offered again on its next check-in. Do not restart the backend
+during a firmware transfer or while conversion code is writing flash. See
 [`docs/switching.md`](../docs/switching.md) for the complete conversion procedure.

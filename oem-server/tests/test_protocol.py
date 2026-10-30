@@ -19,9 +19,9 @@ class Protocol(unittest.TestCase):
   self.assertNotEqual(server.command_body('5410ECA5A92A','0000002B','3.7.1'),server.command_body('5410ECA5A92A','0000002A','3.7.1'))
 
 class DeliveryProgress(unittest.TestCase):
- def test_device_and_image_progress_without_allowlist(self):
-  a=server.delivery_marker('5410ECA5A92A',b'one')
-  self.assertNotEqual(a,server.delivery_marker('5410ECA5A92B',b'one'))
-  self.assertNotEqual(a,server.delivery_marker('5410ECA5A92A',b'two'))
+ def test_device_and_image_lock_keys(self):
+  a=server.delivery_key('5410ECA5A92A',b'one')
+  self.assertNotEqual(a,server.delivery_key('5410ECA5A92B',b'one'))
+  self.assertNotEqual(a,server.delivery_key('5410ECA5A92A',b'two'))
 
 if __name__=='__main__':unittest.main()

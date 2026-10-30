@@ -1,4 +1,4 @@
-"""Probe an OEM update server using a synthetic MAC (creates one delivery marker)."""
+"""Probe an OEM update server using a synthetic MAC."""
 import http.client,json,sys
 host=sys.argv[1] if len(sys.argv)>1 else '192.168.23.30'
 fake_mac='01.00.00.020000'  # maps to locally administered 02:00:00:00:00:01

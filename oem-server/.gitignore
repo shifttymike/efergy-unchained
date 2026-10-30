@@ -2,3 +2,5 @@ logs/*
 images/*
 legacy-ssl/openssl-*.tar.gz
 __pycache__/
+.env
+lan-services/state/*

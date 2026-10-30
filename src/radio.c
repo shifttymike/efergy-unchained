@@ -4,7 +4,8 @@
 #include "radio_capture.h"
 #include "radio_profiles.h"
 
-volatile uint16_t radio_captures, radio_overruns;
+volatile uint32_t radio_captures;
+volatile uint16_t radio_overruns;
 uint8_t radio_version;
 static radio_frame_t captured;
 volatile radio_capture_t raw_capture __at(0xe00);
