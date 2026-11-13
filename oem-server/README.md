@@ -25,6 +25,6 @@ image using an in-memory lock. Restarting the backend clears the lock. It does
 not create persistent delivery-marker files.
 
 To opt in to LAN DHCP and DNS, copy `.env.example` to `.env`, configure the
-isolated LAN settings, then run `docker compose --profile lan up --build -d`.
+isolated LAN settings, then run `docker compose --profile lan up --build`.
 The profile is off by default; read the DHCP safety notes in the server guide
 before enabling it.
